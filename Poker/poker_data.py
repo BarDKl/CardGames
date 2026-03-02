@@ -18,6 +18,10 @@ class SetChecks:
         return max(cards)
 
     @staticmethod
+    def sort_ranks(cards: list[Card]):
+        return sorted(cards, key=lambda c: int(c.rank), reverse=True)
+    
+    @staticmethod
     def find_sets(cards: list[Card]):
         counts = Counter(card.rank for card in cards)
         ranks_sorted = sorted([rank for rank, count in counts.items() if count > 1], key=lambda r: int(r), reverse=True)
@@ -43,3 +47,21 @@ class SetChecks:
         sets = SetChecks.find_sets(cards)
         result = [set for set in sets if len(set) == 3]
         return result[0] if result else []
+    
+    @staticmethod
+    def check_straight(cards: list[Card]):
+        cards_sorted = sorted(cards, key=lambda c: int(c.rank), reverse=False)
+        straight: list[Card] = []
+        for card in cards_sorted:
+            if not straight:
+                straight.append(card)
+            else:
+                if int(card.rank) == int(straight[-1].rank) + 1:
+                    straight.append(card)
+                elif int(card.rank) != int(straight[-1].rank):
+                    straight = [card]
+        if len(straight) >= 5:
+            return straight[-5:]
+        else:
+            return []
+    

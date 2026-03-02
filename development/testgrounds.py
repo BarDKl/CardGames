@@ -31,5 +31,17 @@ class TestChecks(unittest.TestCase):
         expected = [Card('8', 'Diamond'), Card('8', 'Heart'), Card('8', 'Spade')]
         self.assertEqual(SetChecks.check_three(test_deck), expected)
 
+    def test_straight1(self):
+        test_deck = [Card('2', 'Diamond'), Card('3', 'Heart'), Card('4', 'Diamond'), 
+                     Card('5', 'Heart'), Card('6', 'Diamond'), Card('7', 'Heart'), Card('8', 'Spade')]
+        expected = [Card('4', 'Diamond'), Card('5', 'Heart'), Card('6', 'Diamond'), Card('7', 'Heart'), Card('8', 'Spade')]
+        self.assertEqual(SetChecks.check_straight(test_deck), expected)
+
+    def test_straight2(self):
+        test_deck = [Card('2', 'Diamond'), Card('3', 'Heart'), Card('4', 'Diamond'), 
+                     Card('5', 'Heart'), Card('5', 'Diamond'), Card('7', 'Heart'), Card('8', 'Spade')]
+        expected = []
+        self.assertEqual(SetChecks.check_straight(test_deck), expected)
+
 if __name__ == '__main__':
     unittest.main()
