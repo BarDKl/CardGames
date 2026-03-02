@@ -10,9 +10,6 @@ class Card:
     rank: str
     suit: str
 
-    ranking_map = {i: r for r, i in enumerate(
-        [f"{i}" for i in range(2, 11)] + ["Jack", "Queen", "King", "Ace"])}
-
     def __repr__(self):
         return f"{self.rank} of {self.suit}"
 
